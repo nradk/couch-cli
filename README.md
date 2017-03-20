@@ -8,7 +8,17 @@ database used by the BTF EMR project.
 First, you need to ensure that CouchDB is running is lisetening on the local
 machine on port 5984.
 
-### Databases
+#### Configuring the script
+
+- Ensure that CouchDB is not in the admin party, i.e. make sure admin name and
+  password have been set. Then, provide the admin username and password to
+  `emrcouch`.
+    
+    `./emrcouch set username <username>`
+
+    `./emrcouch set password <password>`
+
+#### Databases
 
 - List all databases
     

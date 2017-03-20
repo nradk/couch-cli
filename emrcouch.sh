@@ -19,12 +19,12 @@ fi
 
 # Examine first argument and dispatch handler if we can
 if [ -z $1 ]; then
-    err "Please provide a command."
+    err "Error: no command provided."
     exit 3;
 fi
 
 if [ "$1" = "db" ]; then
-    db &@
+    db $@
 else
     err "$1 is not an emrcouch command."
 fi
