@@ -22,9 +22,9 @@ function db {
             if [ $2 = "docs" ]; then
                 curl localhost:5984/$3/_all_docs
             elif [ $2 = "create" ]; then
-                curl -XPUT localhost:5984/$3
+                curl -XPUT $username:$password@localhost:5984/$3
             elif [ $2 = "delete" ]; then
-                curl -XDELETE localhost:5984/$3
+                curl -XDELETE $username:$password@localhost:5984/$3
             fi;
         else
             err "Error: Please provide the name of the database."
