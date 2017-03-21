@@ -15,16 +15,16 @@ function db {
     fi
 
     if [ "$2" = "list" ]; then
-        curl localhost:5984/_all_dbs
+        curl $dbhost:5984/_all_dbs
     elif [ "$2" = "docs" -o "$2" = "create" -o "$2" = "delete" ]; then
         check_name_exists $3
         if [ $? -eq 0 ]; then
             if [ $2 = "docs" ]; then
-                curl localhost:5984/$3/_all_docs
+                curl $dbhost:5984/$3/_all_docs
             elif [ $2 = "create" ]; then
-                curl -XPUT $username:$password@localhost:5984/$3
+                curl -XPUT $username:$password@$dbhost:5984/$3
             elif [ $2 = "delete" ]; then
-                curl -XDELETE $username:$password@localhost:5984/$3
+                curl -XDELETE $username:$password@$dbhost:5984/$3
             fi;
         else
             err "Error: Please provide the name of the database."

@@ -11,13 +11,6 @@ if [ ! $? -eq 0 ]; then
     exit 1;
 fi
 
-# Check if couchdb is running
-curl 127.0.0.1:5984 > /dev/null 2>&1;
-if [ ! $? -eq 0 ]; then
-    err "CouchDB is not running on port 5984."
-    exit 2;
-fi
-
 # Check for config file
 if [ ! -e config.sh ]; then
     err "Error: config.sh does not exist."
@@ -35,6 +28,23 @@ source config.sh
 if [ "$username" = ""  -o "$password" = "" ]; then
     err "Error: Admin username and/or password is not defined in the config."
     exit 5;
+fi
+
+# If host is not defined, use localhost
+if [ "$dbhost" = "" ]; then
+    dbhost=localhost
+fi
+
+# If port is not defined, used 5984
+if [ "$dbport" = "" ]; then
+    dbhost=5984
+fi
+
+# Check if couchdb is running
+curl $dbhost:$dbport > /dev/null 2>&1;
+if [ ! $? -eq 0 ]; then
+    err "CouchDB is not running on $dbhost:$dbport"
+    exit 2;
 fi
 
 # Examine first argument and dispatch handler if we can
