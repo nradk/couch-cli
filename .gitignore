@@ -1,5 +1,5 @@
 # vim swap files
 .*.swp
 
-# Our own config
+# our own config
 config.sh

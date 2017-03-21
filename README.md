@@ -1,6 +1,6 @@
-# EMRCOUCH
-`emrcouch` is a helper script to simplify manipulation of the CouchDB backend
-database used by the BTF EMR project.
+# COUCH-CLI
+`couch-cli` is a helper script to simplify manipulation of a CouchDB database
+database through the command line.
 
 ## Configuring the script
 - Ensure that CouchDB is not in the admin party, i.e. make sure admin name and
