@@ -1,4 +1,5 @@
 source includes/utils.sh
+source includes/usage.sh
 
 function check_name_exists {
     if [ -z $1 ]; then
@@ -11,6 +12,7 @@ function check_name_exists {
 function db {
     if [ -z $2 ]; then
         err "Error: no sub-command provided for the db command."
+        usage;
         exit;
     fi
 
@@ -28,8 +30,10 @@ function db {
             fi;
         else
             err "Error: Please provide the name of the database."
+            usage;
         fi
     else
         err "$2 is not a db subcommand."
+        usage;
     fi;
 }

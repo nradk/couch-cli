@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source includes/utils.sh
+source includes/usage.sh
 source includes/user.sh
 source includes/db.sh
 
@@ -50,6 +51,7 @@ fi
 # Examine first argument and dispatch handler if we can
 if [ -z $1 ]; then
     err "Error: no command provided."
+    usage
     exit 6;
 fi
 
@@ -59,5 +61,6 @@ elif [ "$1" = "user" ]; then
     user $@
 else
     err "$1 is not an emrcouch command."
+    usage
     exit 7;
 fi

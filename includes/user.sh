@@ -8,6 +8,7 @@ function getRev {
 function user {
     if [ -z $2 ]; then
         err "Error: no sub-command provided for the user command."
+        usage;
         exit;
     fi
 
@@ -22,6 +23,8 @@ function user {
                      \"type\":\"user\",\"roles\":[],\"password\":\"$4\"}"
         else
             err "Error: Please provide both the username and the password."
+            usage;
+            exit;
         fi
     elif [ "$2" = "delete" ]; then
         check_name_exists $3
@@ -30,8 +33,10 @@ function user {
             curl -XDELETE $username:$password@$dbhost:$dbport/_users/org.couchdb.user:$3?rev=$docrev
         else
             err "Error: Please provide the name of the user."
+            usage;
         fi
     else
         err "$2 is not a user subcommand."
+        usage;
     fi;
 }
