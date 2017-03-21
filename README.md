@@ -32,3 +32,17 @@ machine on port 5984.
 - Delete a database
 
     `./emrcouch db delete <name>`
+
+
+### Users
+- List all users
+    
+    `./emrcouch user list`
+
+- Create a user with given username and password
+    
+    `./emrcouch user create <username> <password>`
+
+- Remove the user with the given username
+
+    `./emrcouch user delete <username>`

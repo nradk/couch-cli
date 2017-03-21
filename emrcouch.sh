@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source includes/utils.sh
+source includes/user.sh
 source includes/db.sh
 
 # Check if curl is installed
@@ -44,6 +45,8 @@ fi
 
 if [ "$1" = "db" ]; then
     db $@
+elif [ "$1" = "user" ]; then
+    user $@
 else
     err "$1 is not an emrcouch command."
     exit 7;
