@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source includes/write_bare_config.sh
 source includes/utils.sh
 source includes/usage.sh
 source includes/user.sh
@@ -14,8 +15,7 @@ fi
 
 # Check for config file
 if [ ! -e config.sh ]; then
-    err "Error: config.sh does not exist."
-    exit 3;
+    write_bare_config
 fi
 
 # Check for config file
@@ -38,7 +38,7 @@ fi
 
 # If port is not defined, used 5984
 if [ "$dbport" = "" ]; then
-    dbhost=5984
+    dbport=5984
 fi
 
 # Check if couchdb is running
