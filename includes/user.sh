@@ -1,10 +1,5 @@
 source includes/utils.sh
 
-function getRev {
-    curl -s $username:$password@$dbhost:$dbport/_users/org.couchdb.user:$1 \ |\
-        tr -d \" | tr , "\n" | grep _rev | sed -r "s/_rev:([[:alnum:]\-]+)/\1/g"
-}
-
 function user {
     if [ -z $2 ]; then
         err "Error: no sub-command provided for the user command."
@@ -29,7 +24,7 @@ function user {
     elif [ "$2" = "delete" ]; then
         check_name_exists $3
         if [ $? -eq 0 ]; then
-            docrev=$(getRev $3)
+            docrev=$(getRev _users org.couchdb.user:$3)
             curl -XDELETE $username:$password@$dbhost:$dbport/_users/org.couchdb.user:$3?rev=$docrev
         else
             err "Error: Please provide the name of the user."

@@ -17,3 +17,8 @@ function check_names_exist {
         return 0;
     fi
 }
+
+function getRev {
+    curl -s $username:$password@$dbhost:$dbport/$1/$2 \ |\
+        tr -d \" | tr , "\n" | grep _rev | sed -r "s/_rev:([[:alnum:]\-]+)/\1/g"
+}
