@@ -12,10 +12,18 @@ function user {
     elif [ "$2" = "create" ]; then
         check_names_exist $3 $4
         if [ $? -eq 0 ]; then
+            check_name_exists $5
+            ROLES=""
+            if [ $? -eq 0 ]; then
+                IFS=',' read -ra ROLES_ARR <<< "$5"
+                for i in "${ROLES_ARR[@]}"; do
+                    ROLES=$ROLES\"$i\",
+                done
+            fi
             curl -XPOST $username:$password@$dbhost:$dbport/_users \
                 -H "Content-Type:application/json"\
                 -d "{\"_id\":\"org.couchdb.user:$3\",\"name\":\"$3\",\
-                     \"type\":\"user\",\"roles\":[],\"password\":\"$4\"}"
+                     \"type\":\"user\",\"roles\":[${ROLES%?}],\"password\":\"$4\"}"
         else
             err "Error: Please provide both the username and the password."
             usage;
